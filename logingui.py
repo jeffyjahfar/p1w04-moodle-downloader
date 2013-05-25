@@ -15,13 +15,24 @@ class Example(QtGui.QWidget):
     def initUI(self):
         QtGui.QToolTip.setFont(QtGui.QFont('SansSerif', 10))
         #self.setToolTip('Login with your<b>LDAP</b> username and password')
-        lbl1 = QtGui.QLabel('Username', self)
-        lbl1.move(15, 30)
-
-        lbl2 = QtGui.QLabel('Password', self)
-        lbl2.move(15, 70)
+        username = QtGui.QLabel('Username')
+        password = QtGui.QLabel('Password')
        
-        self.setGeometry(300, 300, 400, 150)
+        usernameEdit = QtGui.QLineEdit()
+        passwordEdit = QtGui.QLineEdit()
+       
+
+        grid = QtGui.QGridLayout()
+        grid.setSpacing(5)
+
+        grid.addWidget(username, 1, 0)
+        grid.addWidget(usernameEdit, 1, 1)
+
+        grid.addWidget(password, 2, 0)
+        grid.addWidget(passwordEdit, 2, 1)
+        
+        self.setLayout(grid) 
+        self.setGeometry(300, 300, 300, 150)
         self.setWindowTitle('Moodle File Downloader')
         self.setWindowIcon(QtGui.QIcon('moodleicon.png'))     
         
