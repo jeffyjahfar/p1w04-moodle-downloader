@@ -4,6 +4,7 @@
 import sys
 from PyQt4 import QtGui, QtCore
 import os
+#from main import *
 
 class Example(QtGui.QWidget):
     
@@ -23,30 +24,45 @@ class Example(QtGui.QWidget):
        
 
         grid = QtGui.QGridLayout()
-        grid.setSpacing(5)
+        grid.setSpacing(10)
 
         grid.addWidget(username, 1, 0)
         grid.addWidget(usernameEdit, 1, 1)
 
         grid.addWidget(password, 2, 0)
         grid.addWidget(passwordEdit, 2, 1)
-        
+       
         self.setLayout(grid) 
-        self.setGeometry(300, 300, 300, 150)
+        self.setGeometry(300, 300, 300, 180)
         self.setWindowTitle('Moodle File Downloader')
-        self.setWindowIcon(QtGui.QIcon('moodleicon.png'))     
-        
-        
+        self.setWindowIcon(QtGui.QIcon('moodleicon.png')) 
+
+        cb = QtGui.QCheckBox('Remember Credentials', self)
+        grid.addWidget(cb,3,1)
+        cb.toggle()
+       #cb.stateChanged.connect(self.rem_credentials(self,username,password))      call rem_credentials() function here    
+                
         btn = QtGui.QPushButton('Login', self)
         btn.resize(btn.sizeHint())
-        btn.move(35, 120)
+        grid.addWidget(btn, 4, 1)
+       # btn.clicked.connect(login_moodle(self))
         
-        qbtn = QtGui.QPushButton('Cancel', self)
-        qbtn.clicked.connect(QtCore.QCoreApplication.instance().quit)
-        qbtn.resize(qbtn.sizeHint())
-        qbtn.move(135, 120)
+      #  qbtn = QtGui.QPushButton('Cancel', self)
+      #  qbtn.clicked.connect(QtCore.QCoreApplication.instance().quit)
+      #  qbtn.resize(qbtn.sizeHint())
+       # grid.addWidget(qbtn,4,1)
         
         self.show()
+
+"""  def rem_credentials(self, username,password) : 
+       find out how to do it
+      
+        if state == QtCore.Qt.Checked:
+            pass
+        else:
+            pass 
+"""
+
         
        
 def main():

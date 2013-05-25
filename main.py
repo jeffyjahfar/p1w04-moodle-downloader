@@ -39,9 +39,23 @@ class SyncAccount:
             self.logged1=True
             print "Moodle Logged In"
 
-     def login_bighome(self):
+    def login_bighome(self):
         self.s=ftplib.FTP('bighome.iitb.ac.in' , self.username , self.password)
         if self.islog2():
             self.logged2=True
             print "Bighome Logged In"
-            
+
+    def islog1(self):
+        if not "Login" in self.br.title():
+            print "not logged in"
+            return True
+        else : return False
+
+    def islog2(self):
+        try :
+            self.s.nlst()
+            return True
+        except : return False
+
+
+
