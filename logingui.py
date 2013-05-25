@@ -3,7 +3,7 @@
 
 import sys
 from PyQt4 import QtGui, QtCore
-
+import os
 
 class Example(QtGui.QWidget):
     
@@ -12,9 +12,19 @@ class Example(QtGui.QWidget):
         
         self.initUI()
         
-    def initUI(self, event):
+    def initUI(self):
         QtGui.QToolTip.setFont(QtGui.QFont('SansSerif', 10))
         #self.setToolTip('Login with your<b>LDAP</b> username and password')
+        lbl1 = QtGui.QLabel('Username', self)
+        lbl1.move(15, 30)
+
+        lbl2 = QtGui.QLabel('Password', self)
+        lbl2.move(15, 70)
+       
+        self.setGeometry(300, 300, 400, 150)
+        self.setWindowTitle('Moodle File Downloader')
+        self.setWindowIcon(QtGui.QIcon('moodleicon.png'))     
+        
         
         btn = QtGui.QPushButton('Login', self)
         btn.resize(btn.sizeHint())
@@ -25,21 +35,9 @@ class Example(QtGui.QWidget):
         qbtn.resize(qbtn.sizeHint())
         qbtn.move(135, 120)
         
-        self.setGeometry(300, 300, 250, 150)
-        self.setWindowTitle('Moodle File Downloader')
-        self.setWindowIcon(QtGui.QIcon('moodleicon.png'))        
-    
         self.show()
         
-        reply = QtGui.QMessageBox.question(self, 'Message',
-            "Are you sure to quit?", QtGui.QMessageBox.Yes | 
-            QtGui.QMessageBox.No, QtGui.QMessageBox.No)
-
-        if reply == QtGui.QMessageBox.Yes:
-            event.accept()
-        else:
-            event.ignore()                
-        
+       
 def main():
     
     app = QtGui.QApplication(sys.argv)
