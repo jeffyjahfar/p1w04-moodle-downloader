@@ -14,7 +14,7 @@ class MFD(QMainWindow):
 
         QMainWindow.__init__(self, parent)
         self.setWindowTitle('Moodle File Downloader')
-        self.setWindowIcon(QIcon('moodle.png'))   
+        self.setWindowIcon(QIcon('moodleicon.png'))   
         self.create_menu()
         self.create_status_bar()
         self._init_frames()
@@ -68,6 +68,7 @@ class MFD(QMainWindow):
         view.setModel(self.model)
 
         self.start_sync_button = QPushButton("&Sync With PC")
+        self.log_out_button = QPushButton("&Log Out")
 
         self.pdfGet = QCheckBox("Download PDF files")
         self.pdfGet.setCheckState(Qt.Checked)
@@ -75,12 +76,14 @@ class MFD(QMainWindow):
 
         self.main_frame_box.addWidget(view)
         self.main_frame_box.addWidget(self.start_sync_button)
+        self.main_frame_box.addWidget(self.log_out_button)
         self.main_frame_box.addWidget(self.pdfGet)
 
         self.main_frame.setLayout(self.main_frame_box)
 
 
         self.connect( self.start_sync_button, SIGNAL("clicked()"), self.start_sync )
+        self.connect( self.log_out_button, SIGNAL("clicked()"), self.log_out)
 
         ####################### THREAD CONNECTORS ########################
         self.connect(self.sync, SIGNAL("finished()"), self.updateUi)
@@ -158,8 +161,6 @@ class MFD(QMainWindow):
         self.login_frame.hide()
         self.sync.listCourses()
 
-
-
         self.setCentralWidget(self.main_frame)
         self.main_frame_box.addWidget(self.pdfGet)
         self.main_frame.show()
@@ -206,6 +207,12 @@ class MFD(QMainWindow):
     def sync_done(self, msg):
         self.status_text.setText("Finished sync")
         self.start_sync_button.setEnabled(True)
+
+    def log_out(self):
+        print "calling log out"
+        self.sync.logged_out = False
+        print self.sync.logged_out
+
 
     def create_status_bar(self):
         self.status_text = QLabel("Login Required")

@@ -53,9 +53,15 @@ class Sync_Account(QThread):
         # Assuming we landed inside moodle
         if not "Login" in self.br.title():
            self.logged_in = True
+           self.log_out = False
            print "Logged In"
         
         assert self.br.viewing_html()
+
+    def log_out_user(self):
+        #self.br.open("https://moodle.iitb.ac.in/login/logout.php")
+        print "logging out"
+        #self.logged_out = True
 
 
     def listCourses(self):
