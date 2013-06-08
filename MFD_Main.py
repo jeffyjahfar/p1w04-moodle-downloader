@@ -11,6 +11,7 @@ class Sync_Account(QThread):
         QThread.__init__(self, parent)
         self.auth_set = False
         self.logged_in = False
+        self.logged_out = True
 
         self.br = mechanize.Browser()
         self.courses = {}  
@@ -53,7 +54,7 @@ class Sync_Account(QThread):
         # Assuming we landed inside moodle
         if not "Login" in self.br.title():
            self.logged_in = True
-           self.log_out = False
+           self.logged_out = False
            print "Logged In"
         
         assert self.br.viewing_html()
@@ -154,12 +155,19 @@ class Sync_Account(QThread):
 
         self.emit(SIGNAL("sync_courses(QString)"), "done")
 
+    def automatic_repeat(self):
+        while self.logged_out == False:
+            self.syncCoursesRun()
+
+
+
 
     def run(self):
         if self.method == "listCourses":
             self.listCoursesRun()
         elif self.method == "syncCourses":
-            self.syncCoursesRun()
+            #self.syncCoursesRun()
+            self.automatic_repeat()
         elif self.method == "loginCredentials":
             self.loginCredentialsRun()
 

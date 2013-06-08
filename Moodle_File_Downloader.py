@@ -6,6 +6,7 @@ import os
 from MFD_Main import Sync_Account
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+import time
 
 class MFD(QMainWindow):
     def __init__(self, parent=None):
@@ -98,6 +99,7 @@ class MFD(QMainWindow):
          * Moodle File Downloader is used to sync accounts from moodle
          * Set your username and password
          * Select the folders to be synced
+         * Do not close the window unless u want to be logged out
          * Files, as and when uploaded, will be downloaded to the folder
         """
         QMessageBox.about(self, "Moodle File Downloader", msg.strip())
@@ -210,8 +212,13 @@ class MFD(QMainWindow):
 
     def log_out(self):
         print "calling log out"
+        self.status_text.setText("Logging Out..")
+        
         self.sync.logged_out = False
-        print self.sync.logged_out
+        print "logged out"
+        self.status_text.setText("Logged Out")
+        self.main_frame.hide()
+
 
 
     def create_status_bar(self):
