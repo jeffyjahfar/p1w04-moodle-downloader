@@ -1,0 +1,11 @@
+ Moodle File Downloader
+
+Requirements: 
+
+* PyQt4
+* Mechanize Module
+
+To Run the Application:
+  
+*Run Moodle_File_Downloader.py
+For more details, see the Help  (F1) given in the Application.
