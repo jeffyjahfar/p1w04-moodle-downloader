@@ -166,8 +166,8 @@ class Sync_Account(QThread):
         if self.method == "listCourses":
             self.listCoursesRun()
         elif self.method == "syncCourses":
-            #self.syncCoursesRun()
-            self.automatic_repeat()
+            self.syncCoursesRun()
+            #self.automatic_repeat()
         elif self.method == "loginCredentials":
             self.loginCredentialsRun()
 
