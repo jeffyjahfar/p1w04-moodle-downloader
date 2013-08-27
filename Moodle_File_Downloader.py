@@ -93,7 +93,7 @@ class MFD(QMainWindow):
         self.connect(self.sync, SIGNAL("courses(PyQt_PyObject)"), self.load_courses)
         self.connect(self.sync, SIGNAL("sync_courses(QString)"), self.sync_done)
 
-    def on_about(self):
+    def msg_about(self):
         msg = """ 
         Moodle File Downloader
          * Moodle File Downloader is used to sync accounts from moodle
@@ -101,6 +101,7 @@ class MFD(QMainWindow):
          * Select the folders to be synced
          * Do not close the window unless u want to be logged out
          * Files, as and when uploaded, will be downloaded to the folder
+           if the user is logged in.
         """
         QMessageBox.about(self, "Moodle File Downloader", msg.strip())
 
@@ -218,8 +219,7 @@ class MFD(QMainWindow):
         print "logged out"
         self.status_text.setText("Logged Out")
         self.main_frame.hide()
-
-
+        exit()
 
     def create_status_bar(self):
         self.status_text = QLabel("Login Required")
@@ -242,7 +242,7 @@ class MFD(QMainWindow):
         self.add_actions(self.file_menu, (quit_action,))
         self.help_menu = self.menuBar().addMenu("&Help")
         about_action = self.create_action("&About",
-            shortcut='F1', slot=self.on_about,
+            shortcut='F1', slot=self.msg_about,
             tip='About Moodle File Downloader')
 
         self.add_actions(self.help_menu, (about_action,))
